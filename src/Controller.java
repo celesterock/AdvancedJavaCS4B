@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Controller {
 
@@ -40,6 +41,7 @@ public class Controller {
     public void goOnePlayerGame(ActionEvent event)  throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("singlePlayerScreen.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        // stage.initStyle(StageStyle.UNDECORATED);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

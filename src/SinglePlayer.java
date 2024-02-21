@@ -10,7 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
+import javafx.animation.PauseTransition; // delay computer move
+import javafx.util.Duration;             // delay computer move
 
 public class SinglePlayer {
 
@@ -56,12 +57,19 @@ public class SinglePlayer {
     @FXML
     private Label singleLabel;
 
+    // Holds a reference to the stage
     private Stage stage;
     private Scene scene;
     private Parent root;
 
     // game board
     private TicTacToe game = new TicTacToe();
+
+    // File Names
+    private String WELCOME_PAGE = "welcomeScene.fxml";
+    private String PLAYER_WINS_FILE = "playerWinsScreen.fxml";
+    private String COMPUTER_WINS_FILE = "ComputerWins.fxml";
+    private String TIE_GAME_FILE = "CatsTie.fxml";
 
     // create a 2D array of Buttons
     @FXML
@@ -80,12 +88,14 @@ public class SinglePlayer {
         buttonArray[2][0] = arr20;
         buttonArray[2][1] = arr21;
         buttonArray[2][2] = arr22;
+
+        game.initBoard();
     }
 
 
     // we want to go back to the welcome screen
     public void goWelcome(ActionEvent event) throws IOException {
-     root = FXMLLoader.load(getClass().getResource("welcomeScene.fxml"));
+     root = FXMLLoader.load(getClass().getResource(WELCOME_PAGE));
      stage = (Stage)((Node)event.getSource()).getScene().getWindow();
      scene = new Scene(root);
      stage.setScene(scene);
@@ -93,40 +103,26 @@ public class SinglePlayer {
     }
 
 
-
-    // // ---------------------------------------------------
-    // // these will be deleted, they were just for testing
-    // int turnCount = 0;
-
-    // public char getToken() {
-    //     if(turnCount % 2 == 0) {
-    //         turnCount++;
-    //         return 'X';
-    //     }
-    //     turnCount++;
-    //     return 'O';
-    // }
-    // // ------------------------------------------------------
-
     @FXML
     void placeToken(ActionEvent event) {
+
+        // Sets the stage reference
+        if(stage == null) {
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        }
+
         Button selectedButton = (Button) event.getSource();
         String fxid = selectedButton.getId();
 
-        /* Can delete this comment after reading:
-         *  This section is needed to correlate the button that was clicked with the 2D array that will be created
-         *  to keep track of the game. Use the row and col to set the player's token in the array and check
-         *  for win/tie
-         */
         // extract the row and column of the selected button (arr[row][col])
         int row = Character.getNumericValue(fxid.charAt(fxid.length() - 2));
         int col =  Character.getNumericValue(fxid.charAt(fxid.length() - 1));
 
-        // // get the token of the current player
-        // char token = getToken();
+        buttonArray[row][col].setText("X");
 
-        // place the token on the board
-        selectedButton.setText("X");
+        // set the token of the current player
+        char token = 'X';
+        game.setToken(row, col);
 
         // Disable the button so that it cannot be pressed again
         selectedButton.setDisable(true);
@@ -137,51 +133,86 @@ public class SinglePlayer {
         // update the button color
         selectedButton.setStyle("-fx-background-color: #000080;");
 
-        // After the player has taken a turn, now do the computer's turn
-        if(!game.winAchieved() && !game.tieAchieved()) {
-            getCompuerMove();
+
+        if(game.winAchieved(token)) {
+            // display the win screen
+           switchToReultScreen(PLAYER_WINS_FILE);
+
+        }
+        else if (game.tieAchieved()) {
+            switchToReultScreen(TIE_GAME_FILE);
         }
         else {
-            // this is where we would display the appropriate win/tie/loss screen
+            getComputerMove();
         }
+
+
     }
 
-    public void getCompuerMove() {
-        // function to get computer move: (getComputerMove)
-        int[] computerMoveArray = new int[2];
-        computerMoveArray = game.getComputerMoveArray();
+    public void getComputerMove() {
+
+        // Create a PauseTransition
+        PauseTransition pause = new PauseTransition(Duration.seconds(1));
+
+        // Code that should happen AFTER the pause
+        pause.setOnFinished(event -> {
+            // function to get computer move: (getComputerMove)
+            int[] computerMoveArray = new int[2];
+            computerMoveArray = game.getComputerMoveArray();
 
 
-        //update our 2D array
-
-
-
-        // to make the computer "click" on the screen, we need to update the buttonArray
-        Button selectedButton = buttonArray[computerMoveArray[0]][computerMoveArray[1]]; 
-        selectedButton.setText("O");
-
-        // Disable the button so that it cannot be pressed again
-        selectedButton.setDisable(true);
-
-        /* this changes the background color of the button once it is clicked
-            * we will update the styling later, I just set it to this value
-            * to show it can change color */
-        // update the button color
-        selectedButton.setStyle("-fx-background-color: #000080;");
-
-
-
-        // update the UI 
-
-        // check for win and switch back to player's turn
-        if(!game.winAchieved() && !game.tieAchieved()) {
-            getCompuerMove();
-        }
-        else {
-            // this is where we would display the appropriate win/tie/loss screen
-        }
-    }
+            // to make the computer "click" on the screen, we need to update the buttonArray
+            Button selectedButton = buttonArray[computerMoveArray[0]][computerMoveArray[1]]; 
     
+            
+            selectedButton.setText("O");
+
+            // Disable the button so that it cannot be pressed again
+            selectedButton.setDisable(true);
+
+            /* this changes the background color of the button once it is clicked
+                * we will update the styling later, I just set it to this value
+                * to show it can change color */
+            // update the button color
+            selectedButton.setStyle("-fx-background-color: #000080;");
 
 
+            if(game.winAchieved('O')) {
+                // display the win screen
+                switchToReultScreen(COMPUTER_WINS_FILE);
+            }
+            else if (game.tieAchieved()) {
+            switchToReultScreen(TIE_GAME_FILE);
+            }
+        });
+
+        // start the pause
+        pause.play();
+
+    }
+
+
+    /* Takes in the appropriate FXML FileName depending on who the winner is
+     * Uses a reference to the stage object (initialized in placeToken())
+     * because the win/tie screens need to be called without a specific button */
+    private void switchToReultScreen(String fxmlFileName) {
+         // Create a PauseTransition
+         PauseTransition pause = new PauseTransition(Duration.seconds(1));
+
+         // After the pause..
+         pause.setOnFinished(event -> {
+            try {
+            
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFileName));
+                    Parent root = loader.load();
+                    Scene newScene = new Scene(root);
+                    stage.setScene(newScene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        //start the pause
+        pause.play();
+    }
 }
