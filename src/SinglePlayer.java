@@ -140,9 +140,11 @@ public class SinglePlayer {
 
         }
         else if (game.tieAchieved()) {
+            // display the tie screen
             switchToReultScreen(TIE_GAME_FILE);
         }
         else {
+            // allow computer to pick a move
             getComputerMove();
         }
 
@@ -151,7 +153,7 @@ public class SinglePlayer {
 
     public void getComputerMove() {
 
-        // Create a PauseTransition
+        // Create a PauseTransition: computer will be "thinking" for 1 second
         PauseTransition pause = new PauseTransition(Duration.seconds(1));
 
         // Code that should happen AFTER the pause

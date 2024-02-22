@@ -40,16 +40,11 @@ public class TicTacToe {
 
       computerRow = rand.nextInt(3);
       computerCol = rand.nextInt(3);
-      System.out.println("trying spot" + computerRow + " " + computerCol);
-
+      
     } while (gameBoard[computerRow][computerCol] != ' '); // if taken repeat while loop
 
     gameBoard[computerRow][computerCol] = Otoken;
 
-    System.out.println("The computer selects spots: \n");
-    System.out.println(computerRow);
-    System.out.println(computerCol);
-    
     return new int[]{computerRow, computerCol};
 
   }

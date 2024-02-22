@@ -5,31 +5,31 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #e8e7e7;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <Text layoutX="149.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cats Tie!" textAlignment="CENTER" wrappingWidth="302.1367492675781">
+      <Text layoutX="156.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cats Tie!" textAlignment="CENTER" wrappingWidth="302.1367492675781">
          <font>
-            <Font name="Impact" size="69.0" />
+            <Font name="Impact" size="30.0" />
          </font>
       </Text>
-      <Text layoutX="114.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sorry, looks like there's been a tie!" textAlignment="CENTER" wrappingWidth="371.469970703125">
+      <Text layoutX="189.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sorry, looks like there's been a tie!" textAlignment="CENTER" wrappingWidth="236.80328369140625">
          <font>
-            <Font name="Impact" size="33.0" />
+            <Font name="Impact" size="16.0" />
          </font>
       </Text>
-      <Text layoutX="123.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Would you like to play again?" wrappingWidth="352.8033752441406">
+      <Text layoutX="209.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Would you like to play again?" wrappingWidth="195.47006225585938">
          <font>
-            <Font name="Impact" size="28.0" />
+            <Font name="Impact" size="16.0" />
          </font>
       </Text>
-      <Button layoutX="218.0" layoutY="312.0" mnemonicParsing="false" onAction="#goOnePlayerGame" text="YES">
+      <Button layoutX="229.0" layoutY="312.0" mnemonicParsing="false" onAction="#goOnePlayerGame" prefHeight="37.0" prefWidth="59.0" style="-fx-background-color: #ea5656;" text="Yes">
          <font>
-            <Font name="Impact" size="18.0" />
+            <Font name="Impact" size="16.0" />
          </font>
       </Button>
-      <Button layoutX="332.0" layoutY="312.0" mnemonicParsing="false" onAction="#goWelcome" prefHeight="34.0" prefWidth="49.0" text="NO">
+      <Button layoutX="320.0" layoutY="312.0" mnemonicParsing="false" onAction="#goWelcome" prefHeight="37.0" prefWidth="59.0" style="-fx-background-color: #ea5656;" text="No">
          <font>
-            <Font name="Impact" size="18.0" />
+            <Font name="Impact" size="16.0" />
          </font>
       </Button>
    </children>
