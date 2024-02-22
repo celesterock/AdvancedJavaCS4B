@@ -11,24 +11,30 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane hgap="14.0" maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<GridPane hgap="14.0" maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #e8e7e7;" vgap="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
   <children>
     <VBox maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" prefHeight="206.0" prefWidth="444.0" spacing="7.0" GridPane.rowIndex="1">
       <children>
         <Label fx:id="detailsLabel" text="Are you sure you want to exit?" textAlignment="LEFT" wrapText="true">
           <font>
-            <Font size="33.0" />
+            <Font name="Impact" size="30.0" />
           </font>
         </Label>
             <HBox prefHeight="46.0" prefWidth="444.0" spacing="40.0">
                <children>
-                  <Button fx:id="okButton11" alignment="CENTER" minWidth="45.0" mnemonicParsing="false" onAction="#goWelcome" prefHeight="39.0" prefWidth="62.0" text="YES" wrapText="true" />
-                  <Button fx:id="okButton111" alignment="CENTER" minWidth="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="62.0" text="NO" wrapText="true" />
+                  <Button fx:id="okButton11" alignment="CENTER" minWidth="45.0" mnemonicParsing="false" onAction="#goWelcome" prefHeight="39.0" prefWidth="62.0" style="-fx-background-color: #ea5656;" text="YES" wrapText="true">
+                     <font>
+                        <Font name="Impact" size="16.0" />
+                     </font></Button>
+                  <Button fx:id="okButton111" alignment="CENTER" minWidth="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="62.0" style="-fx-background-color: #ea5656;" text="NO" wrapText="true">
+                     <font>
+                        <Font name="Impact" size="16.0" />
+                     </font></Button>
                </children>
             </HBox>
             <Label fx:id="detailsLabel1" text="All game progress will be lost." textAlignment="LEFT" wrapText="true">
                <font>
-                  <Font size="20.0" />
+                  <Font name="Impact" size="16.0" />
                </font>
             </Label>
       </children>
@@ -44,7 +50,11 @@
         <HBox fx:id="okParent" alignment="CENTER" />
       </children>
     </HBox>
-<Button fx:id="okButton" minWidth="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="45.0" text="X" GridPane.columnIndex="1" />
+<Button fx:id="okButton" minWidth="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="45.0" style="-fx-background-color: #ea5656;" text="X" GridPane.columnIndex="1">
+         <font>
+            <Font name="Impact" size="16.0" />
+         </font>
+      </Button>
   </children>
   <columnConstraints>
     <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="Infinity" minWidth="-Infinity" prefWidth="444.0" />
